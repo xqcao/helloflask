@@ -58,12 +58,13 @@ pipeline{
         }
         stage("4th task"){
             steps{
-                if(flag == true){
-                    echo "start build images"
-                }else{
-                    echo "image existed, skip image build ...."
-                }
-                
+                script{
+                    if(flag){
+                        echo "start build images"
+                    }else{
+                        echo "image existed, skip image build ...."
+                    }
+                 }
             }
         }
         
