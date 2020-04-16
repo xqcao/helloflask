@@ -32,6 +32,16 @@ pipeline{
                 }
             }
         }
+        stage("3rd task"){
+            steps{
+                echo "check image is exist?"
+                script{
+                    def img = "nginx:1.13.0-alpine"
+                    def isImageexist = sh script "docker images -q ${img} 2> /dev/null" , returnStdout: true
+                    echo "${img} is isImageexist"
+                }
+            }
+        }
         
 
     }
