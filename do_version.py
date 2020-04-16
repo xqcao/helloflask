@@ -6,7 +6,7 @@ with open('commitflask.json', 'r') as ff1:
 with open("allv.json", 'r') as ff2:
     data2 = json.load(ff2)
 ii = 1
-for dd in data[-1:]:
+for dd in data[::-1]:
     try:
         data2[dd['sha']]
     except:
