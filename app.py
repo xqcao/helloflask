@@ -8,6 +8,7 @@ app = Flask(__name__)
 def hello():
     msg = {
         "name": "adam",
+        "version": "1",
         "date": datetime.datetime.now()
     }
     return render_template("index.html", msg=msg)
