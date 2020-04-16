@@ -3,16 +3,28 @@ pipeline{
     stages{
         stage("1st task"){
             steps{
-                echo "========executing first stage========"
+                echo "========executing first stage create commitflask.json file========"
                 script{
                     def _ids =  getCommitIds()
+
                     for(int j=0;j<_ids.size();j++){
+                        try {
+                            sh "this is try block"
+                        } catch (Exception e) {
+                            sh 'Handle the exception!'
+                        }
                         echo "commit id: ${_ids[j]}"
                     }
                 }
-            }
-            
+            } 
         }
+        stage("2nd task"){
+            steps{
+                echo "=====run python to generate version-json file"
+
+            }
+        }
+
     }
     
 }
