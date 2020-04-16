@@ -68,13 +68,13 @@ pipeline{
             }
         }
         stage("5th task"){
-            when { flag }
+            when { flag true }
             steps{
                 echo "when flag is true, this 5th task is run, current_flag: ${flag}, do this"
             }
         }
          stage("6th task"){
-            when { not flag }
+            when { not flag true}
             steps{
                 echo "when flag is false, this 6th task is run, current_flag: ${flag}, do this"
             }
