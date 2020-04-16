@@ -1,3 +1,5 @@
+def currect_id
+
 pipeline{
     agent any
     stages{
@@ -5,6 +7,8 @@ pipeline{
             steps{
                 echo "========executing first stage create commitflask.json file========"
                 script{
+                    currect_id= sh 'git rev-parse HEAD'
+                    echo "currect id is ${currect_id}"
                     def _ids =  getCommitIds()
 
                     for(int j=0;j<_ids.size();j++){
@@ -27,6 +31,7 @@ pipeline{
                 }
             }
         }
+        stage("")
 
     }
     
@@ -49,4 +54,9 @@ def dopy_process(){
     def data2=readJSON file: "allv.json"
     echo "json_data: ${data2}"
     return "all json job is done"
+}
+
+def getVersionTage(String id){
+    def data3=readJSON file: "allv.json"
+    return data3[id]
 }
