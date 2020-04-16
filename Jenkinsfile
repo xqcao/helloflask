@@ -2,7 +2,7 @@ def flag
 pipeline{
     agent any
     environment{
-        currect_id= sh script: 'git rev-parse HEAD', returnStdout: true
+        current_id= sh script: 'git rev-parse HEAD', returnStdout: true
     }
     stages{
         stage("1st task"){
@@ -10,7 +10,7 @@ pipeline{
                 echo "========executing first stage create commitflask.json file========"
                 script{
                     
-                    echo "currect id is ${currect_id}"
+                    echo "currect id is ${current_id}"
                     def _ids =  getCommitIds()
 
                     for(int j=0;j<_ids.size();j++){
@@ -65,6 +65,18 @@ pipeline{
                         echo "image existed, skip image build ...."
                     }
                  }
+            }
+        }
+        stage("5th task"){
+            when { flag }
+            steps{
+                echo "when flag is true, this 5th task is run, current_flag: ${flag}, do this"
+            }
+        }
+         stage("6th task"){
+            when { not flag }
+            steps{
+                echo "when flag is false, this 6th task is run, current_flag: ${flag}, do this"
             }
         }
         
