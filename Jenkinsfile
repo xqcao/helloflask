@@ -35,15 +35,14 @@ pipeline{
         stage("3rd task"){
             steps{
                 echo "check image is exist?"
-                withCredentials([string(credentialsId: 'docker-hub-pwd', variable: 'dockerHubPwd')]) {
-                        sh "docker login -u adamcao -p ${dockerHubPwd}"
-                        script{
+                script{
+                    withCredentials([string(credentialsId: 'docker-hub-pwd', variable: 'dockerHubPwd')]) {
+                            sh "docker login -u adamcao -p ${dockerHubPwd}"           
                             def img = "nginx:1.13.0-alpine"
-                            def isImageexist = sh "docker images -q ${img}"
-                        }
-                        
-                        echo "${img} is isImageexist"
+                            def isImageexist = sh  script: "docker images -q ${img}", returnStdout: true
+                            echo "${img} is isImageexist"
                     }
+                }
             }
         }
         
