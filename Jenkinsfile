@@ -37,7 +37,7 @@ pipeline{
                 echo "check image is exist?"
                 script{
                     def img = "nginx:1.13.0-alpine"
-                    def isImageexist = sh  "docker images -q ${img} 2> /dev/null"
+                    def isImageexist = sh  "docker images -q ${img}"
                     echo "${img} is isImageexist"
                 }
             }
