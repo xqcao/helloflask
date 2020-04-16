@@ -40,7 +40,7 @@ pipeline{
                             sh "docker login -u adamcao -p ${dockerHubPwd}"           
                             def img = "nginx:abc"
                             def isImageexist = sh  "docker images -q ${img}"
-                            echo "${img} is isImageexist"
+                            echo "${img} is ${isImageexist}"
                     }
                 }
             }
