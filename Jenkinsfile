@@ -1,4 +1,4 @@
-def flag
+def flag = false
 pipeline{
     agent any
     environment{
