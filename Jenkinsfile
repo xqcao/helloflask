@@ -1,7 +1,7 @@
 pipeline{
     agent any
     environment{
-        currect_id= sh 'git rev-parse HEAD'
+        currect_id= sh script: 'git rev-parse HEAD', returnStdout: true
     }
     stages{
         stage("1st task"){
