@@ -41,6 +41,11 @@ pipeline{
                             def img = "nginx:abc"
                             def isImageexist = sh  "docker images -q ${img}"
                             echo "${img} is ${isImageexist}"
+                            
+                            def img2 = "nginx:1.15.8"
+                            def isImageexist2 = sh  "docker images -q ${img2}"
+                            echo "${img2} is ${isImageexist2}"
+                            
                     }
                 }
             }
