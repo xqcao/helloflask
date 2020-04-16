@@ -39,11 +39,11 @@ pipeline{
                     withCredentials([string(credentialsId: 'docker-hub-pwd', variable: 'dockerHubPwd')]) {
                             sh "docker login -u adamcao -p ${dockerHubPwd}"           
                             def img = "nginx:abc"
-                            def isImageexist = sh  "docker images -q ${img}"
+                            def isImageexist = sh script: "docker images -q ${img}", returnStdout: true
                             echo "${img} is ${isImageexist}"
-                            
+
                             def img2 = "nginx:1.15.8"
-                            def isImageexist2 = sh  "docker images -q ${img2}"
+                            def isImageexist2 = sh script: "docker images -q ${img2}", returnStdout: true
                             echo "${img2} is ${isImageexist2}"
                             
                     }
