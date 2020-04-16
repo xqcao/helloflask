@@ -68,15 +68,15 @@ pipeline{
             }
         }
         stage("5th task"){
-            when { expression{ not flag } }
+            when { expression{ flag } }
             steps{
-                echo "when flag is true, this 5th task is run, current_flag: ${flag}, do this"
+                echo "when flag is false, meaning the image is existed, this 5th task is run, current_flag: ${flag}, do this"
             }
         }
          stage("6th task"){
-            when { expression { flag}}
+            when { expression { not flag}}
             steps{
-                echo "when flag is false, this 6th task is run, current_flag: ${flag}, do this"
+                echo "when flag is true,,meaning image not exist, start build image, this 6th task is run, current_flag: ${flag}, do this"
             }
         }
         
