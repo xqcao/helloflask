@@ -1,13 +1,14 @@
-def currect_id
-
 pipeline{
     agent any
+    environment{
+        currect_id= sh 'git rev-parse HEAD'
+    }
     stages{
         stage("1st task"){
             steps{
                 echo "========executing first stage create commitflask.json file========"
                 script{
-                    currect_id= sh 'git rev-parse HEAD'
+                    
                     echo "currect id is ${currect_id}"
                     def _ids =  getCommitIds()
 
