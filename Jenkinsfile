@@ -1,3 +1,4 @@
+def flag
 pipeline{
     agent any
     environment{
@@ -41,13 +42,28 @@ pipeline{
                             def img = "nginx:abc"
                             def isImageexist = sh script: "docker images -q ${img}", returnStdout: true
                             echo "${img} is ${isImageexist}"
+                            if(isImageexist !=""){
+                                flag=false
+                            }else{
+                                flag=true
+                            }
 
-                            def img2 = "nginx:1.15.8"
-                            def isImageexist2 = sh script: "docker images -q ${img2}", returnStdout: true
-                            echo "${img2} is ${isImageexist2}"
+                            // def img2 = "nginx:1.15.8"
+                            // def isImageexist2 = sh script: "docker images -q ${img2}", returnStdout: true
+                            // echo "${img2} is ${isImageexist2}"
                             
                     }
                 }
+            }
+        }
+        stage("4th task"){
+            steps{
+                if(flag){
+                    echo "start build images"
+                }else{
+                    echo "image existed, skip image build ...."
+                }
+                
             }
         }
         
