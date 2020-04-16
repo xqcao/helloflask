@@ -7,7 +7,7 @@ pipeline{
                 script{
                     def _ids =  getCommitIds()
                     for(int j=0;j<_ids.size();j++){
-                        echo "commit id: ${_ids[i]}"
+                        echo "commit id: ${_ids[j]}"
                     }
                 }
             }
