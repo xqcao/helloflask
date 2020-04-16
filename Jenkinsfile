@@ -21,7 +21,10 @@ pipeline{
         stage("2nd task"){
             steps{
                 echo "=====run python to generate version-json file"
-
+                script{
+                    def pys = dopy_process()
+                    echo "2nd-return-value: ${pys}"
+                }
             }
         }
 
@@ -39,4 +42,11 @@ def getCommitIds(){
     }
     return ids
 
+}
+
+def dopy_process(){
+    sh "python3 do_version.py"
+    def data2=readJSON file: "allv.json"
+    echo "json_data: ${data2}"
+    return "all json job is done"
 }
