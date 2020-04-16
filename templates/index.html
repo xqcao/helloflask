@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>flask webapp</title>
+    <link rel="stylesheet" href="{{url_for('static',filename='styles.css')}}">
+</head>
+
+<body>
+    <h2>Hello flask webapp</h2>
+    <p>{{msg}}</p>
+    <button type="button" id="datebtn">Update new date</button>
+    <hr>
+    <p id="newdate"></p>
+    <script src="{{url_for('static',filename='myscript.js')}}"></script>
+</body>
+
+</html>
