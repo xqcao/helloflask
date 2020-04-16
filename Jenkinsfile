@@ -9,9 +9,9 @@ pipeline{
 
                     for(int j=0;j<_ids.size();j++){
                         try {
-                            sh "this is try block"
+                            echo "this is try block"
                         } catch (Exception e) {
-                            sh 'Handle the exception!'
+                            echo 'Handle the exception!'
                         }
                         echo "commit id: ${_ids[j]}"
                     }
