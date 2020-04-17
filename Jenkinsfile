@@ -3,6 +3,7 @@ pipeline{
     agent any
     environment{
         current_id= sh script: 'git rev-parse HEAD', returnStdout: true
+        mypwd = "${sh(script:'pwd', returnStdout: true)}"
     }
     stages{
         stage("1st task"){
@@ -11,6 +12,7 @@ pipeline{
                 script{
                     
                     echo "currect id is ${current_id}"
+                    echo "PWD path: ${mypwd}"
                     def _ids =  getCommitIds()
 
                     for(int j=0;j<_ids.size();j++){
@@ -43,8 +45,10 @@ pipeline{
                             def isImageexist = sh script: "docker images -q ${img}", returnStdout: true
                             echo "${img} is ${isImageexist}"
                             if(isImageexist !=""){
+                                echo "image not find, need build new one, before use, flag is false"
                                 flag=false
                             }else{
+                                echo "image existed, flag is true"
                                 flag=true
                             }
 
@@ -70,13 +74,13 @@ pipeline{
         stage("5th task"){
             when { expression{ flag } }
             steps{
-                echo "when flag is false, meaning the image is existed, this 5th task is run, current_flag: ${flag}, do this"
+                echo "when flag is true, meaning the image is existed, this 5th task is run, current_flag: ${flag}, do this"
             }
         }
          stage("6th task"){
             when { expression { not flag}}
             steps{
-                echo "when flag is true,,meaning image not exist, start build image, this 6th task is run, current_flag: ${flag}, do this"
+                echo "when flag is false,,meaning image not exist, start build image, this 6th task is run, current_flag: ${flag}, do this"
             }
         }
         
